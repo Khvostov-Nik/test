@@ -76,7 +76,7 @@ let question = ()=>{
         return <div>{id}) Вопрос: {questionRand}</div>
       }
 let answerShow = answerRand.map((item)=>{
-    return <div>{count++}) {item}</div>
+    return <div><span>{count++}) </span><label ><input type="radio" name="answer" id='{count++}' /><span>{item}</span></label></div>
 })
  
   return (
