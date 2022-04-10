@@ -5,77 +5,77 @@ function App() {
     {
         id:'1',   
         question:'Виды инструктажей, проводимые для рабочих профессий:',
-        true:'a',
-        answers:{
-            a:'По программе первичного инструктажа для работников рабочих профессий',
-            b:'По программе вводного инструктажа',
-            c:'Программа не требуется'
-        }
+        true:'1',
+        answers:[
+            'По программе первичного инструктажа для работников рабочих профессий',
+            'По программе вводного инструктажа',
+            'Программа не требуется'
+        ]
     },
     {
         id:'2',
         question:'question2',
-        true:'a',
-        answers:{
-            a:'4',
-            b:'5',
-            c:'6'
-        }
+        true:'1',
+        answers:[
+            '4',
+            '5',
+            '6'
+        ]
     },
     {
         id:'3',
         question:'question3',
-        true:'a',
-        answers:{
-            a:'7',
-            b:'8',
-            c:'9'
-        }
+        true:'1',
+        answers:[
+            '7',
+            '8',
+            '9'
+        ]
     },
     {
         id:'4',
         question:'question4',
-        true:'a',
-        answers:{
-            a:'10',
-            b:'11',
-            c:'12'
-        }
+        true:'1',
+        answers:[
+            '10',
+            '11',
+            '12'
+        ]
     },
     {
         id:'5',
         question:'question5',
-        true:'a',
-        answers:{
-            a:'13',
-            b:'14',
-            c:'15'
-        }
+        true:'1',
+        answers:[
+            '13',
+            '14',
+            '15'
+        ]
     },
     {
         id:'6',
         question:'question6',
-        true:'a',
-        answers:{
-            a:'16',
-            b:'17',
-            c:'18'
-        }
+        true:'1',
+        answers:[
+            '16',
+            '17',
+            '18'
+        ]
     },
     ]
     
     let rand = Math.floor(Math.random() * questions.length);
-    let question = questions[rand].question
-    let id = Object.values(questions[rand].id)
-    let answers = Object.values(questions[rand].answers)
+    let questionRand = questions[rand].question
+    let id = questions[rand].id
+    let answers = questions[rand].answers
     let answerRand= answers.sort(()=>Math.random()-0.5)
     let count = 1
 
 
-let q = ()=>{
-        return <div>{id}) Вопрос: {question}</div>
+let question = ()=>{
+        return <div>{id}) Вопрос: {questionRand}</div>
       }
-let a = answerRand.map((item)=>{
+let answerShow = answerRand.map((item)=>{
     return <div>{count++}) {item}</div>
 })
  
@@ -84,8 +84,8 @@ let a = answerRand.map((item)=>{
       <header className="App-header">
         
         <div>
-        {q(questions)}
-        {a}
+        {question(questionRand)}
+        {answerShow}
         </div>
 
 
