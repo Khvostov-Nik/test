@@ -68,19 +68,19 @@ function App() {
   let questionRand = questions[rand].question;
   let id = questions[rand].id;
   let answers = Object.values(questions[rand].answers);
-    let answersKye = Object.keys(questions[rand].answers);
+//   let answersKye = Object.keys(questions[rand].answers);
   let answerRand = answers.sort(() => Math.random() - 0.5);
 
   let question = () => {
     return (
-      <div key={id}>
+      <div >
         {id}) Вопрос: {questionRand}
       </div>
     );
   };
   let answerShow = answerRand.map((item) => {
     return (
-      <div key={id+answersKye}>
+      <div>
         <label>
           <input type="radio" name="answer" id="{count++}" />
           <span>{item}</span>
