@@ -1,17 +1,40 @@
-.App {
-  text-align: center;
-}
-
-
-
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+
+}
+.container{
   display: flex;
   flex-direction: column;
+  width: 600px;
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin: 0 auto;
   color: white;
 }
-
+.btn{
+  max-width: 200px;
+  padding: 10px;
+}
+.answer,.question{
+  margin-bottom: 20px;  
+}
+.answer{
+margin-right: auto;
+}
+.answer-text{
+  max-width: 580px;
+  margin-left: 5px;
+}
+.answer-inner{
+  display: flex;
+}
+/* .input-radio{
+  display: none;
+} */
+.err{
+  background-color:red;
+}
+.correct{
+  background-color: green;
+}
