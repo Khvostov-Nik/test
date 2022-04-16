@@ -64,11 +64,14 @@ function App() {
     },
   ];
   let count = 1;
-  const rand = Math.floor(Math.random() * questions.length);
-  const questionRand = questions[rand].question;
-  const id = questions[rand].id;
-  const answers = Object.entries(questions[rand].answers);
-  const answerRand = answers.sort(() => Math.random() - 0.5);
+  let cor=[];
+  let err=[];
+
+  let rand = Math.floor(Math.random() * questions.length);
+  let questionRand = questions[rand].question;
+  let questionId = questions[rand].id;
+  let answers = Object.entries(questions[rand].answers);
+  let answerRand = answers.sort(() => Math.random() - 0.5);
 
   const checkAnswer = () => {
     const checkRadio = document.querySelector('input[name="answer"]:checked');
@@ -78,15 +81,17 @@ function App() {
     }
     if (checkRadio.value === trueAnswer) {
       checkRadio.parentNode.classList.add('correct');
+      cor.push(questionId)
     } else {
       checkRadio.parentNode.classList.add('err');
+      err.push(questionId)
     }
   };
 
   const question = () => {
     return (
-      <div className='question' key={id}>
-        {id}) Вопрос: {questionRand}
+      <div className='question' key={questionId}>
+        {questionId}) Вопрос: {questionRand}
       </div>
     );
   };
@@ -111,7 +116,7 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <div class='container'>
+        <div className='container'>
           {question(questionRand)}
           {answerShow}
           <button onClick={checkAnswer} className='btn'>
