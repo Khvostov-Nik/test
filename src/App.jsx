@@ -5,7 +5,7 @@ function App() {
     {
       id: '1',
       question: 'Виды инструктажей, проводимые для рабочих профессий:',
-      true: '1',
+      true: 'a',
       answers: {
         a: 'По программе первичного инструктажа для работников рабочих профессий',
         b: 'По программе вводного инструктажа',
@@ -15,7 +15,7 @@ function App() {
     {
       id: '2',
       question: 'question2',
-      true: '2',
+      true: 'b',
       answers: {
         a: 'Lorem ipsum dolor sit amet.',
         b: 'em ipsum dolor sit amet.',
@@ -25,7 +25,7 @@ function App() {
     {
       id: '3',
       question: 'question3',
-      true: '1',
+      true: 'a',
       answers: {
         a: '7',
         b: '8',
@@ -35,7 +35,7 @@ function App() {
     {
       id: '4',
       question: 'question4',
-      true: '2',
+      true: 'b',
       answers: {
         a: '10',
         b: '11',
@@ -45,7 +45,7 @@ function App() {
     {
       id: '5',
       question: 'question5',
-      true: '3',
+      true: 'c',
       answers: {
         a: '13',
         b: '14',
@@ -55,7 +55,7 @@ function App() {
     {
       id: '6',
       question: 'question6',
-      true: '2',
+      true: 'b',
       answers: {
         a: '16',
         b: '17',
@@ -69,15 +69,17 @@ function App() {
   const id = questions[rand].id;
   const answers = Object.entries(questions[rand].answers);
   const answerRand = answers.sort(() => Math.random() - 0.5);
-  
+
   const checkAnswer = () => {
-    const checkRadio =document.querySelector(
-      'input[name="answer"]:checked'
-      );
-    // const trueAnswer = questions[rand].true;
-      if (!checkRadio) {
-        
-        return
+    const checkRadio = document.querySelector('input[name="answer"]:checked');
+    const trueAnswer = questions[rand].true;
+    if (!checkRadio) {
+      return;
+    }
+    if (checkRadio.value === trueAnswer) {
+      checkRadio.parentNode.classList.add('correct');
+    } else {
+      checkRadio.parentNode.classList.add('err');
     }
   };
 
@@ -93,8 +95,13 @@ function App() {
     return (
       <div className='answer'>
         <label className='answer-inner'>
-          <input className='input-radio' value={item[0]} type='radio' name='answer' />
-          <div>{count++})</div> 
+          <input
+            className='input-radio'
+            value={item[0]}
+            type='radio'
+            name='answer'
+          />
+          <div>{count++})</div>
           <div className='answer-text'>{item[1]} </div>
         </label>
       </div>
@@ -107,7 +114,9 @@ function App() {
         <div class='container'>
           {question(questionRand)}
           {answerShow}
-          <button onClick={checkAnswer} className='btn'>Проверить ответ</button>
+          <button onClick={checkAnswer} className='btn'>
+            Проверить ответ
+          </button>
         </div>
       </header>
     </div>
