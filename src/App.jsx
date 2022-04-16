@@ -7,19 +7,19 @@ function App() {
       question: "Виды инструктажей, проводимые для рабочих профессий:",
       true: "1",
       answers: {
-        1: "По программе первичного инструктажа для работников рабочих профессий",
-        2: "По программе вводного инструктажа",
-        3: "Программа не требуется",
+        a: "По программе первичного инструктажа для работников рабочих профессий",
+        b: "По программе вводного инструктажа",
+        c: "Программа не требуется",
       },
     },
     {
       id: "2",
       question: "question2",
-      true: "1",
+      true: "2",
       answers: {
-        1: "4",
-        2: "5",
-        3: "6",
+        a: "4",
+        b: "5",
+        c: "6",
       },
     },
     {
@@ -27,39 +27,39 @@ function App() {
       question: "question3",
       true: "1",
       answers: {
-        1: "7",
-        2: "8",
-        3: "9",
+        a: "7",
+        b: "8",
+        c: "9",
       },
     },
     {
       id: "4",
       question: "question4",
-      true: "1",
+      true: "2",
       answers: {
-        1: "10",
-        2: "11",
-        3: "12",
+        a: "10",
+        b: "11",
+        c: "12",
       },
     },
     {
       id: "5",
       question: "question5",
-      true: "1",
+      true: "3",
       answers: {
-        1: "13",
-        2: "14",
-        3: "15",
+        a: "13",
+        b: "14",
+        c: "15",
       },
     },
     {
       id: "6",
       question: "question6",
-      true: "1",
+      true: "2",
       answers: {
-        1: "16",
-        2: "17",
-        3: "18",
+        a: "16",
+        b: "17",
+        c: "18",
       },
     },
   ];
@@ -67,23 +67,26 @@ function App() {
   let rand = Math.floor(Math.random() * questions.length);
   let questionRand = questions[rand].question;
   let id = questions[rand].id;
-  let answers = Object.values(questions[rand].answers);
-//   let answersKye = Object.keys(questions[rand].answers);
+  // let trueAnswer = questions[rand].true;
+  let answers = Object.entries(questions[rand].answers);
   let answerRand = answers.sort(() => Math.random() - 0.5);
-
+  
   let question = () => {
     return (
-      <div >
+      <div key={id}>
         {id}) Вопрос: {questionRand}
       </div>
     );
   };
+
+//  const getValue =()=> document.querySelector('input[name="answer"]:checked').value;
+
   let answerShow = answerRand.map((item) => {
     return (
-      <div>
+      <div key={item[0]}>
         <label>
-          <input type="radio" name="answer" id="{count++}" />
-          <span>{item}</span>
+          <input value={item[0]} type="radio" name="answer" id="{count++}" />
+          <span > {item[1]} </span>
         </label>
       </div>
     );
@@ -94,7 +97,8 @@ function App() {
       <header className="App-header">
         <div>
           {question(questionRand)}
-          {answerShow}
+          {answerShow }
+          <button>Проверить ответ</button>
         </div>
       </header>
     </div>
