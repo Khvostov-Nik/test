@@ -1,7 +1,9 @@
 import './App.css';
+import React, {useState} from 'react';
 
 function App() {
-  const questions = [
+
+  const [questions]=useState([
     {
       id: '1',
       question: 'Виды инструктажей, проводимые для рабочих профессий:',
@@ -62,17 +64,21 @@ function App() {
         c: '18',
       },
     },
-  ];
+  ])
+  let index=0;
   let count = 1;
   let cor = [];
   let err = [];
   let arrQuestions = [];
   let randIndex;
-  let index = 0;
+
+  
   let rand = () => {
     randIndex = Math.floor(Math.random() * questions.length);
     return randIndex;
   };
+  
+  
   let questionRand = () => {
     while (arrQuestions.length < 3) {
       let q;
@@ -92,16 +98,20 @@ function App() {
   
   const checkAnswer = () => {
     const checkRadio = document.querySelector('input[name="answer"]:checked');
-    const trueAnswer = question[index].true;
+    const trueAnswer = arrQuestions[index].true;
     if (!checkRadio) {
       return;
     }
     if (checkRadio.value === trueAnswer) {
       checkRadio.parentNode.classList.add('correct');
       cor.push(questionId);
+      
+      
+      
     } else {
       checkRadio.parentNode.classList.add('err');
       err.push(questionId);
+    
     }
   };
   
@@ -115,7 +125,7 @@ function App() {
   
   const answerShow = answerRand.map((item) => {
     return (
-      <div className='answer'>
+      <div className='answer' key={item[0]}>
         <label className='answer-inner'>
           <input
             className='input-radio'
@@ -129,10 +139,8 @@ function App() {
       </div>
     );
   });
-  let indexNext = () => {
-    return index ++
-  };
-  
+
+
   return (
     <div className='App'>
       <header className='App-header'>
@@ -141,9 +149,6 @@ function App() {
           {answerShow}
           <button onClick={checkAnswer} className='btn'>
             Проверить ответ
-          </button>
-          <button onClick={indexNext} className='btn'>
-            слудещий вопрос
           </button>
         </div>
       </header>
