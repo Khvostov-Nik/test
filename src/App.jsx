@@ -64,38 +64,55 @@ function App() {
     },
   ];
   let count = 1;
-  let cor=[];
-  let err=[];
-
-  let rand = Math.floor(Math.random() * questions.length);
-  let questionRand = questions[rand].question;
-  let questionId = questions[rand].id;
-  let answers = Object.entries(questions[rand].answers);
+  let cor = [];
+  let err = [];
+  let arrQuestions = [];
+  let randIndex;
+  let index = 0;
+  let rand = () => {
+    randIndex = Math.floor(Math.random() * questions.length);
+    return randIndex;
+  };
+  let questionRand = () => {
+    while (arrQuestions.length < 3) {
+      let q;
+      rand();
+      q = questions[randIndex];
+      arrQuestions.push(q);
+    }
+    return arrQuestions;
+  };
+  
+  questionRand();
+  
+  let question = arrQuestions[index].question;
+  let questionId = arrQuestions[index].id;
+  let answers = Object.entries(arrQuestions[index].answers);
   let answerRand = answers.sort(() => Math.random() - 0.5);
-
+  
   const checkAnswer = () => {
     const checkRadio = document.querySelector('input[name="answer"]:checked');
-    const trueAnswer = questions[rand].true;
+    const trueAnswer = question[index].true;
     if (!checkRadio) {
       return;
     }
     if (checkRadio.value === trueAnswer) {
       checkRadio.parentNode.classList.add('correct');
-      cor.push(questionId)
+      cor.push(questionId);
     } else {
       checkRadio.parentNode.classList.add('err');
-      err.push(questionId)
+      err.push(questionId);
     }
   };
-
-  const question = () => {
+  
+  const questionShow = () => {
     return (
       <div className='question' key={questionId}>
-        {questionId}) Вопрос: {questionRand}
+        {questionId}) Вопрос: {question}
       </div>
     );
   };
-
+  
   const answerShow = answerRand.map((item) => {
     return (
       <div className='answer'>
@@ -105,22 +122,28 @@ function App() {
             value={item[0]}
             type='radio'
             name='answer'
-          />
+            />
           <div>{count++})</div>
           <div className='answer-text'>{item[1]} </div>
         </label>
       </div>
     );
   });
-
+  let indexNext = () => {
+    return index ++
+  };
+  
   return (
     <div className='App'>
       <header className='App-header'>
         <div className='container'>
-          {question(questionRand)}
+          {questionShow(question[index])}
           {answerShow}
           <button onClick={checkAnswer} className='btn'>
             Проверить ответ
+          </button>
+          <button onClick={indexNext} className='btn'>
+            слудещий вопрос
           </button>
         </div>
       </header>
