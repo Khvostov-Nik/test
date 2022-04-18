@@ -65,7 +65,7 @@ function App() {
       },
     },
   ])
-  let index=0;
+  const [index,setIndex]=useState(0);
   let count = 1;
   let cor = [];
   let err = [];
@@ -147,9 +147,10 @@ function App() {
         <div className='container'>
           {questionShow(question[index])}
           {answerShow}
-          <button onClick={checkAnswer} className='btn'>
+          <button onClick={checkAnswer}className='btn'>
             Проверить ответ
           </button>
+          <button  onClick={()=>setIndex(index+1)}>слудующий вопрос</button>
         </div>
       </header>
     </div>
